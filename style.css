@@ -1,0 +1,289 @@
+.article{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 5px;
+    padding: 0;
+    box-shadow: 0px 0px 10px 6px rgba(0,0,0,0.05);
+}
+.article:hover{
+    box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.05);
+}
+#shopCart{
+    position: fixed;
+    bottom: 2%;
+    right: 2%;
+    font-size: 2rem;
+    color: #1abc9c;
+    cursor: pointer;
+    z-index: 111;
+}
+#panier{
+    position: fixed;
+    width: 0%;
+    min-height: 0px;
+    top: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    overflow: hidden;
+    transition: 0.2s ease-in-out;
+    background: white;
+    z-index: 1;
+}
+#panier > h2{
+    color: #1abc9c;
+}
+.panierClick{
+    min-height: 500px !important;
+    width: 50% !important;
+    transition: 0.2s ease-in-out;
+}
+#sideBar{
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 10%;
+    height: 100vh;
+    background:#f3f3f3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 0;
+}
+#navBar{
+    z-index: 1;
+    background:#1abc9c !important;
+}
+#main{
+    position: absolute;
+    left: 10%;
+    top: 10%;
+    width: 90%;
+    padding: 50px;
+}
+.price{
+    text-align: left;
+    font-size: 1rem;
+}
+.title{
+    text-align: left;
+    font-size: 0.8rem;
+    color: rgb(37, 33, 33);
+    font-weight: 400;
+}
+.bottomArticle{
+    width: 100%;
+}
+#buy{
+    font-size: 1.5rem;
+    color: #1abc9c;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+#buy:hover{
+    font-size: 1.7rem;
+    color: #26a88e;
+    transition: 0.3s ease;
+}
+.buyContent{
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#btnCart{
+    position: fixed;
+    bottom: 2%;
+    right: 2%;
+    background: #1abc9c !important;
+    color: white;
+    z-index: 111;
+}
+#delete{
+    color: rgb(177, 51, 51);
+    cursor: pointer;
+}
+#delete:hover{
+    color: rgb(209, 58, 58);
+}
+#detailBtn{
+    position: absolute;
+    right: 0;
+    bottom: 22%;
+    background: rgba(255, 255, 255, 0.8) !important;
+    color:  #1abc9c !important;
+}
+#detailBtn:hover{
+    background: #1abc9c !important;
+    color: white !important;
+    border: none;
+}
+footer{
+    width: 20%;
+    color: white;
+    background:#f3f3f3;
+    background: url('img/bannerRight2.gif');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    z-index: -1000;
+}
+.slide{
+    width: 88%;
+    height: 200px;
+    margin-bottom: 50px;
+}
+.validate{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255,255,255,0.8);
+    z-index: -100000;
+    position: absolute;
+    flex-direction: column;
+    color: #1abc9c;
+    transition: 0.3s ease;
+}
+.validateCheck{
+    font-size: 2.5rem;
+    color: #1abc9c;
+}
+.validateClick{
+    z-index: 100000;
+    transition: 0.3s ease;
+}
+#more{
+    cursor: pointer;
+}
+#less{
+    cursor: pointer;
+}
+#searchBtn{
+    background: rgba(255,255,255,0.8);
+    color: #1abc9c;
+}
+#addCart{
+    font-size: 1.4rem;
+    color: rgb(202, 191, 43);
+}
+
+/* .fade-enter-active, .fade-leave-active{
+    transition: opacity 1s, transform 1s;
+}
+.fade-enter, .fade-leave-active{
+    opacity: 0;
+    transform: translateX(20px);
+} */
+.fade-enter-active {
+    /* transition: all .3s ease; */
+    transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0); 
+  }
+.fade-leave-active {
+    transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);   
+  }
+.fade-enter, .fade-leave-to
+  /* .slide-fade-leave-active below version 2.1.8 */ {
+    transform: translateX(10px);
+    opacity: 0;
+  }
+#btnCommandNext, #btnCommandFinal, #alertSuccess{
+    display: none;
+}
+.block{
+    display: block !important;
+}
+.none{
+    display: none !important;
+}
+#logo{
+    width: 80px;
+}
+#navBar{
+    background: rgba(252, 252, 252, 1) !important;
+}
+.nav-link, .nav-link>i{
+    color: #1abc9c !important;
+    font-size: 1.9rem;
+    transition: 0.2s ease-in;
+}
+
+select{
+    box-shadow: 0 10px 25px rgba(0, 0, 0, );
+    font-size: 1rem;
+    padding: 1em 1.5em;
+    background: white;
+    color: #1abc9c;
+    width: 100%;
+    border-radius: 25px 25px 25px 25px;
+    margin-bottom: 25px;
+    border: 1px solid #1abc9c;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    cursor: pointer;
+    outline: 0 !important;
+    transition: 0.2s ease-in;
+}
+select:focus{
+    border: 1px solid #14816b;
+}
+select:hover{
+    border: 1px solid white;
+    color: white;
+    background: #1abc9c;
+    transition: 0.2s ease-in;
+}
+.selectMobile{
+    display: none;
+}
+.fas.fa-home:hover{
+    color: #14816b !important;
+    transition: 0.2s ease-in;
+}
+
+@media (max-width:991px){
+    footer{
+        width: 0%;
+    }
+    #sideBar{
+        width: 0%;
+    }
+    #main{
+        width: 100%;
+        padding: 0;
+        position: relative;
+        left: 0;
+        margin-top: 100px;
+    }
+    .selectDesktop{
+        display: none;
+    }
+    .selectMobile{
+        display: block;
+    }
+    .mobile{
+        justify-content: center !important;
+        margin-right: 0px !important;
+        margin-left: 0px !important;
+    }
+}
+@media (max-width:576px){
+    #main{
+        padding: 50px;
+    }
+}
+

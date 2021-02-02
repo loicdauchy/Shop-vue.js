@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My easy Market</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico" />
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</head>
+<body>
+  <!-- NAVBAR -->
+
+
+
+  <!-- MAINCONTENT -->
+    <div class="container-fluid" id="main">
+
+
+  <!-- CAROUSSEL -->
+      
+
+        <div class="row justify-content-start align-items-center mobile" id="content">
+
+          <nav id="navBar" class="navbar navbar-expand-lg navbar-light bg-info fixed-top">
+            <a class="navbar-brand" href="#"><img id="logo" src="img/logo.gif" alt=""></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav ml-auto">
+                <li class="nav-item d-flex justify-content-center align-items-center">
+                  <input id="inputSearch" class="form-control mr-sm-2 " type="search" placeholder="Rechercher..." v-model="search">
+                </li>
+                <li class="nav-item active">
+                  <a class="nav-link" href="/"><i class="fas fa-home"></i><span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                  <select class="selectMobile" v-model="categorySearch">
+                    <option value="">Catégories</option>
+                    <option v-bind:value="categorie.title" v-for="categorie in categories">{{categorie.title}}</option>
+                  </select>
+                </li>
+                <li class="nav-item active">
+                  <select class="selectMobile" id="selectPrice" v-model="priceSearch">
+                    <option value="">Prix</option>
+                    <option value="10">Moins de 10€</option>
+                    <option value="50">Entre de 10€ et 50€</option>
+                    <option value="51">Entre de 50€ et 100€</option>
+                    <option value="101">Supérieur 100€</option>
+                  </select>
+                </li>
+                <li class="nav-item active">
+                  <button id="btnCart" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
+                    Voir le panier           
+                    <i id="addCart" class="fas fa-cart-plus" v-if="commandes.length > 0">{{ cmdLength }}</i>             
+                    <i id="iconCart" class="fas fa-shopping-cart" v-else></i>
+                  </button>
+                </li>
+              </ul>
+            </div>
+        </nav>
+<!-- 
+          <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+              <div class="carousel-item active slide">
+                <img class="d-block w-100 slide" src="img/banner2.jpg" alt="First slide">
+              </div>
+              <div class="carousel-item slide">
+                <img class="d-block w-100 slide" src="img/banner1.jpg" alt="Second slide">
+              </div>
+          </div>
+        </div> -->
+
+          <!-- SIDEBAR -->
+    <div id="sideBar">
+        <!-- INPUT SEARCH -->
+        <div class="col-12 d-flex justify-content-center align-items-center flex-column px-1">
+       
+          <select class="selectDesktop" v-model="categorySearch">
+            <option value="">Catégories</option>
+            <option v-bind:value="categorie.title" v-for="categorie in categories">{{categorie.title}}</option>
+          </select>
+          
+          <select class="selectDesktop" id="selectPrice" v-model="priceSearch">
+            <option value="">Prix</option>
+            <option value="10">Moins de 10€</option>
+            <option value="50">Entre de 10€ et 50€</option>
+            <option value="51">Entre de 50€ et 100€</option>
+            <option value="101">Supérieur 100€</option>
+          </select>
+        </div> 
+        
+
+    </div>
+    
+  <!-- CART SHOP MODAL           -->
+            
+
+        <!-- PANIER -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Votre panier:</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <table class="table table-striped">
+                      <thead>
+                        <tr>
+                          <th scope="col">Réf</th>
+                          <th scope="col">Article</th>
+                          <th scope="col">Prix</th>
+                          <th scope="col">Quantité</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr v-for="commande in commandes">
+                          <th scope="row">{{ commande.id }}</th>
+                          <td>{{ commande.title }}</td>
+                          <td>{{ commande.newPrice }}€</td>
+                          <td>{{ commande.qty }}</td>
+                          <td><i id="more" class="fas fa-plus" v-on:click="ajouter(commande)"></i> <i id="less" class="fas fa-minus" v-on:click="soustraire(commande)"></i></td>
+                          <td><i id="delete" class="fas fa-trash-alt" v-on:click="retirer(commande)"></i></td>
+                        </tr>
+
+                        <tr>
+                          <th scope="row">Total:</th>
+                          <td>{{ totalPrice }}€</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  <transition name="fade">
+                    <form action="" v-if="show" id="info">
+                      <h5>Vos informations:</h5>
+                      <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Nom / Prénom" id="nom">
+                      </div>
+
+                      <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Adresse E-mail" id="mail">
+                      </div>
+
+                      <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Adresse de livraison" id="adress">
+                      </div>
+
+                      <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Numéros de téléphone" id="num">
+                      </div>
+                    </form>
+                  </transition>
+
+                  <transition name="fade">
+                    <form action="" v-if="cb" id="infoCB">
+                      <h5>Vos informations banquaires:</h5>
+                      <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Titulaire de la carte" id="titulaire">
+                      </div>
+
+                      <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Numéro de CB" id="numCB">
+                      </div>
+
+                      <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Date de fin de validité" id="fdv">
+                      </div>
+
+                      <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Cryptogramme visuel" id="crypto">
+                      </div>
+                    </form>
+                  </transition>
+                  <div class="alert alert-success" role="alert" id="alertSuccess">
+                    Félicitations ! Votre achat à bien était effectué, Vous allez recevoir un récapitulatif de votre commande sous peu,
+                    au plaisir de vous revoir bientôt =)
+                  </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">fermer</button>
+                    <button id="btnCommand" type="button" class="btn btn-primary" v-on:click="show = !show">Commander</button>
+                    <button id="btnCommandNext" type="button" class="btn btn-warning" v-on:click="cb = !cb">Poursuivre</button>
+                    <button id="btnCommandFinal" type="button" class="btn btn-success">Finaliser la commande</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+  <!-- DETAILS MODAL           -->
+            <div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">{{ details.title }}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <img v-bind:src="url + details.image"  alt="" style="width:100%;height:400px;">
+                    <p v-html="details.description"></p>
+                    <h4>Prix: {{details.price}}€</h4>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">fermer</button>
+                    <div class="buyContent">
+                      <i id="buy" class="fas fa-shopping-cart" v-on:click="commander(details)"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+   <!-- ARTICLE LISTE         -->
+    
+      <transition-group name="fade" v-if="categorySearch.length > 0 && priceSearch.length > 0" class="row justify-content-start align-items-center mobile">
+        <template>
+          <div class="col-12 col-sm-5 col-lg-3 article" v-for="article in filteredCumulate" v-bind:key="article.id">
+          
+            <div class="validate" v-bind:id="article.id">
+              <h5>
+                Article bien ajouté au panier..
+              </h5>
+              <i class="fas fa-check validateCheck"></i>
+            </div>
+              <img v-bind:src="url + article.image"  alt="" style="width:100%;height:200px;">
+              <button id="detailBtn" class="btn btn-success" data-toggle="modal" data-target="#detailModal"  v-on:click="makeDetails(article)">
+                Détails
+              </button>
+              <div class="d-flex bottomArticle justify-content-between">
+                <div class="d-flex flex-column justify-content-start">
+                  <h4 class="price">{{article.price}}€</h4>
+                  <h4 class="title">{{article.title}}</h4>
+                </div>
+                <div class="buyContent">
+                  <i id="buy" class="fas fa-shopping-cart" v-on:click="commander(article)"></i>
+                </div>
+              </div>
+          </div>
+        </template>
+      </transition-group>
+
+      <transition-group name="fade" v-else-if="search.length > 0" class="row justify-content-start align-items-center mobile">
+        <template>
+            <div class="col-12 col-sm-5 col-lg-3 article" v-for="article in filteredArticle" v-bind:key="article.id">
+          
+              <div class="validate" v-bind:id="article.id">
+                <h5>
+                  Article bien ajouté au panier..
+                </h5>
+                <i class="fas fa-check validateCheck"></i>
+              </div>
+                <img v-bind:src="url + article.image"  alt="" style="width:100%;height:200px;">
+                <button id="detailBtn" class="btn btn-success" data-toggle="modal" data-target="#detailModal"  v-on:click="makeDetails(article)">
+                  Détails
+                </button>
+                <div class="d-flex bottomArticle justify-content-between">
+                  <div class="d-flex flex-column justify-content-start">
+                    <h4 class="price">{{article.price}}€</h4>
+                    <h4 class="title">{{article.title}}</h4>
+                  </div>
+                  <div class="buyContent">
+                    <i id="buy" class="fas fa-shopping-cart" v-on:click="commander(article)"></i>
+                  </div>
+                </div>
+           </div>
+        </template>
+      </transition-group>
+      
+      <transition-group name="fade" v-else-if="priceSearch.length > 0" class="row justify-content-start align-items-center mobile">
+         <template>
+          <div class="col-12 col-sm-5 col-lg-3 article" v-for="article in filteredPrice" v-bind:key="article.id">
+          
+            <div class="validate" v-bind:id="article.id">
+              <h5>
+                Article bien ajouté au panier..
+              </h5>
+              <i class="fas fa-check validateCheck"></i>
+            </div>
+             <img v-bind:src="url + article.image"  alt="" style="width:100%;height:200px;">
+             <button id="detailBtn" class="btn btn-success" data-toggle="modal" data-target="#detailModal"  v-on:click="makeDetails(article)">
+               Détails
+             </button>
+             <div class="d-flex bottomArticle justify-content-between">
+               <div class="d-flex flex-column justify-content-start">
+                 <h4 class="price">{{article.price}}€</h4>
+                 <h4 class="title">{{article.title}}</h4>
+               </div>
+               <div class="buyContent">
+                 <i id="buy" class="fas fa-shopping-cart" v-on:click="commander(article)"></i>
+               </div>
+             </div>
+          </div>
+        </template>
+      </transition-group>
+
+      <transition-group name="fade" v-else-if="categorySearch.length > 0" class="row justify-content-start align-items-center mobile">
+       <template>
+          <div class="col-12 col-sm-5 col-lg-3 article" v-for="article in filteredCategory" v-bind:key="article.id">
+          
+            <div class="validate" v-bind:id="article.id">
+              <h5>
+                Article bien ajouté au panier..
+              </h5>
+              <i class="fas fa-check validateCheck"></i>
+            </div>
+             <img v-bind:src="url + article.image"  alt="" style="width:100%;height:200px;">
+             <button id="detailBtn" class="btn btn-success" data-toggle="modal" data-target="#detailModal"  v-on:click="makeDetails(article)">
+               Détails
+             </button>
+             <div class="d-flex bottomArticle justify-content-between">
+               <div class="d-flex flex-column justify-content-start">
+                 <h4 class="price">{{article.price}}€</h4>
+                 <h4 class="title">{{article.title}}</h4>
+               </div>
+               <div class="buyContent">
+                 <i id="buy" class="fas fa-shopping-cart" v-on:click="commander(article)"></i>
+               </div>
+             </div>
+          </div>
+       </template>
+      </transition-group>
+
+      <transition-group name="fade" v-else class="row justify-content-start align-items-center mobile">
+         <template>
+          <div class="col-12 col-sm-5 col-lg-3 article"  v-for="article in articles" v-bind:key="article.id">
+            
+            <div class="validate" v-bind:id="article.id">
+              <h5>
+                Article bien ajouté au panier..
+              </h5>
+              <i class="fas fa-check validateCheck"></i>
+            </div>
+             <img v-bind:src="url + article.image"  alt="" style="width:100%;height:200px;">
+             <button id="detailBtn" class="btn btn-success" data-toggle="modal" data-target="#detailModal"  v-on:click="makeDetails(article)">
+               Détails
+             </button>
+             <div class="d-flex bottomArticle justify-content-between">
+               <div class="d-flex flex-column justify-content-start">
+                 <h4 class="price">{{article.price}}€</h4>
+                 <h4 class="title">{{article.title}}</h4>
+               </div>
+               <div class="buyContent">
+                 <i id="buy" class="fas fa-shopping-cart" v-on:click="commander(article)"></i>
+               </div>
+             </div>
+          </div>
+        </template> 
+      </transition-group>
+
+
+        </div>
+    </div>
+
+<footer>
+  <!-- <p>©Shop VueJs - crée par Loïc Dauchy</p> -->
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
